@@ -9,6 +9,7 @@
                         <span class="alert-inner--icon"><i class="fa fa-thumbs-down"></i></span>
                     {% endif %}
                     <span class="alert-inner--text"><strong>{{ label | title }} : </strong>{{ message | raw }}</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             {% endfor %}
         {% endfor %}
