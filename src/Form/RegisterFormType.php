@@ -37,6 +37,12 @@ class RegisterFormType extends AbstractType
                     'Non binaire' => 'non-binaire'
                 ],
                 'expanded' => true,
+                'label_attr' => [
+                    'class' => 'radio-inline'
+                ],
+                'choice_attr' => [
+                    'class' => 'radio-inline'
+                ],
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Valider',
