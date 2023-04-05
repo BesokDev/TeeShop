@@ -9,33 +9,39 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ path('show_home') }}">Accueil</a>
                 </li>
-                
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('register') }}">Inscription</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Connexion</a>
-                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Mon compte</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Déconnexion</a>
-                </li>
+                {% if not app.user %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('register') }}">Inscription</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Mon compte</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                    </li>
+                {% endif %}
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Espace Admin
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Dashboard</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Gestion des produits</a></li>
-                        <li><a class="dropdown-item" href="#">Gestion des membres</a></li>
-                        <li><a class="dropdown-item" href="#">Gestion des commandes</a></li>
-                    </ul>
-                </li>
+                {# Pour vérifier le rôle d'un User, vous DEVEZ utiliser la fonction Twig is_granted() #}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Espace Admin
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Dashboard</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Gestion des produits</a></li>
+                            <li><a class="dropdown-item" href="#">Gestion des membres</a></li>
+                            <li><a class="dropdown-item" href="#">Gestion des commandes</a></li>
+                        </ul>
+                    </li>
+                {% endif %}
+
             </ul>
             
             <div class="me-5">
