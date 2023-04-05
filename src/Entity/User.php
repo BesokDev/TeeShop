@@ -36,7 +36,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 100)]
     private ?string $lastname = null;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 15)]
     private ?string $gender = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
