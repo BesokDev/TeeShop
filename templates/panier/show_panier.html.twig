@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon panier{% endblock %}
+
+{% block body %}
+
+    <h1 class="text-center my-3">Mon panier</h1>
+
+    {% include 'include/_flashes.html.twig' %}
+
+    <div class="row my-3">
+        <div class="col-10 mx-auto">
+
+            <table class="table">
+                <thead>
+                <tr class="text-center">
+                    <th>Produit</th>
+                    <th>Quantité</th>
+                    <th>P.U</th>
+                    <th>Sous-Total</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                    {% for item in app.session.get('panier') %}
+
+                        <tr class="align-middle text-center">
+                            <td>{{ item['product'].title }}</td>
+                            <td>{{ item['quantity'] }}</td>
+                            <td>{{ item['product'].price }}</td>
+                            <td>{{ item['product'].price * item['quantity'] }}</td>
+                            <td>
+                                <a href="{{ path('delete_item', {'id': item['product'].id}) }}" title="Supprimer le produit du panier" class="btn btn-sm btn-danger"><i class="bi bi-x-circle"></i></a>
+                            </td>
+                        </tr>
+
+                    {% else %}
+                        <tr>
+                            <td colspan="6" class="text-center bg-warning">Votre panier est vide</td>
+                        </tr>
+                    {% endfor %}
+
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="4" class="align-middle text-center">Montant total : </td>
+                    <td class="align-middle text-center">{{ total }} €</td>
+                    <td></td>
+                </tr>
+                </tfoot>
+            </table>
+
+            <div class="row">
+                <a href="{{ path('delete_panier') }}" class="btn btn-danger col-6 text-center">Vider mon panier</a>
+                <a href="#" class="btn btn-success col-6 text-center">Valider mon panier</a>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

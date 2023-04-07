@@ -9,6 +9,24 @@
 
     {% include 'include/_flashes.html.twig' %}
 
+    <div class="row mx-auto mb-5">
+
+            {% for product in products | reverse %}
+                <div class="col-3">
+
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{ asset('uploads/' ~ product.photo) }}" class="card-img-top img-custom" height="200" alt="{{ product.title }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.title }}</h5>
+                            <p class="card-text">{{ product.descript }}</p>
+                            <a href="{{ path('add_item', {'id': product.id}) }}" class="btn btn-primary">Ajouter au panier</a>
+                        </div>
+                    </div>
+
+                </div>
+            {% endfor %}
+
+    </div>
 
 {% endblock %}
 
